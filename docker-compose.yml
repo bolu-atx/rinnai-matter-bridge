@@ -1,0 +1,18 @@
+services:
+  rinnai-bridge:
+    build: .
+    container_name: rinnai-bridge
+    network_mode: host # Matter needs mDNS and IPv6 on the LAN
+    restart: unless-stopped
+    user: "1000:1000" # must own ./data; change to your uid:gid (id -u; id -g)
+    volumes:
+      - ./data:/data
+    environment:
+      RINNAI_HOST: 10.0.0.23
+      RINNAI_PORT: 9798
+      POLL_SECONDS: 15
+      MIN_TEMP_F: 98
+      MAX_TEMP_F: 120
+      RECIRC_MINUTES: 5
+      MATTER_PORT: 5540
+      MATTER_LOG_LEVEL: info

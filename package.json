@@ -1,0 +1,18 @@
+{
+  "name": "rinnai-matter-bridge",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node --test --test-timeout=15000 test/"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@matter/main": "0.18.0"
+  },
+  "description": "Local Matter bridge for Rinnai Control-R tankless water heaters (Google Home, Apple Home, Alexa)"
+}

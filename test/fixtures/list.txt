@@ -1,0 +1,71 @@
+# monitor
+#   help for help
+               m01_water_flow_rate_raw:  0 (0x0) {29d}
+                m02_outlet_temperature:  111 (0x6f) {29d}
+              m03_combustion_hours_raw:  8 (0x8) {126d}
+                 m04_combustion_cycles:  588 (0x24c) {29d}
+                     m05_fan_frequency:  0 (0x0) {29d}
+          m06_other_system_controllers:  101 (0x65) {196d}
+       m07_water_flow_control_position:  1 (0x1) {196d}
+                 m08_inlet_temperature:  107 (0x6b) {29d}
+                       m09_fan_current:  0 (0x0) {29d}
+            m10_total_bath_fill_volume:  0 (0x0) {196d}
+ m11_heat_exchanger_outlet_temperature:  128 (0x80) {29d}
+             m12_bypass_servo_position:  37 (0x25) {29d}
+                                   m13:  null {-}
+              m14_internal_temperature:  null {-}
+     m15_indoor_antifreeze_temperature:  77 (0x4d) {126d}
+                                   m16:  null {-}
+    m17_outdoor_antifreeze_temperature:  null {-}
+                                   m18:  null {-}
+                        m19_pump_hours:  2 (0x2) {29d}
+                       m20_pump_cycles:  71 (0x47) {29d}
+               m21_exhaust_temperature:  95 (0x5f) {29d}
+                ma__total_water_volume:  null {-}
+                      maintenance_list:  '1,2,3,4,5,6,7,8,9,10,11,12,15,19,20,21,100,101,102,120,121,122' {196d}
+                    mc__total_calories:  null {-}
+                            error_code:  '   ' {212d}
+                      lime_scale_error:  null {-}
+                   domestic_combustion:  false {31m}
+                  domestic_temperature:  120 (0x78) {212d}
+                 recirculation_capable:  true {212d}
+                recirculation_duration:  null {-}
+                     temperature_table:  2 (0x2) {212d}
+                          module_start:  null {-}
+                           device_boot:  null {-}
+                           ap_mac_addr:  '00:00:00:00:00:00' {4d}
+                             public_ip:  '0.0.0.0' {141d}
+                              local_ip:  '10.0.0.23' {4d}
+                wifi_channel_frequency:  '2437' {4d}
+                  wifi_signal_strength:  '-58' {14m}
+                             wifi_ssid:  'SSID' {4d}
+             recirculation_temperature:  null {-}
+                      zigbee_inventory:  '[{"node-id":60612,"mfg-id":65535}]' {212d}
+                         zigbee_status:  '{"zigbee-presence":{"node-id":60612, "rssi":-66}}' {12d}
+                          warning_code:  '   ' {212d}
+              do_maintenance_retrieval:  null {29d}
+                          lock_enabled:  false {212d}
+          maximum_domestic_temperature:  null {-}
+          minimum_domestic_temperature:  null {-}
+                     operation_enabled:  true {212d}
+                       priority_status:  false {212d}
+                 recirculation_enabled:  false {70m}
+          recirculation_not_configured:  null {-}
+              set_domestic_temperature:+ 125 (0x7d) {212d}
+                 set_operation_enabled:  null {-}
+                   set_priority_status:  null {-}
+             set_recirculation_enabled:  null {75m}
+                              schedule:+ '01c004c007c00ac00dc010c013c016c019c01cc01fc022c025c028c0' {212d}
+                      schedule_enabled:+ true {212d}
+                      schedule_holiday:+ null {-}
+                              timezone:+ 'PST8PDT,M3.2.0,M11.1.0' {212d}
+                  heater_serial_number:  null {-}
+                                 model:  null {-}
+               module_firmware_version:  '238' {212d}
+                      module_log_level:+ null {-}
+                     rinnai_registered:  null {-}
+                             do_zigbee:  null {-}
+                          baton_shadow:  null {-}
+                            baton_info:  null {-}
+                             exception:  null {-}
+                               ca_info:  '{"ca":{"revocation-date":"2021-08-23T16:17:18-07:00","revocation-sn":"0000000000000010"}}' {212d}
