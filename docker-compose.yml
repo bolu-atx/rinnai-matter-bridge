@@ -11,8 +11,6 @@ services:
       RINNAI_HOST: 10.0.0.23
       RINNAI_PORT: 9798
       POLL_SECONDS: 15
-      MIN_TEMP_F: 98
-      MAX_TEMP_F: 120
       RECIRC_MINUTES: 5
       MATTER_PORT: 5540
       MATTER_LOG_LEVEL: info

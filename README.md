@@ -4,18 +4,13 @@ A small local bridge that exposes a Rinnai tankless water heater with a **Contro
 
 It talks to the heater directly over your LAN. It does not use the Rinnai cloud, and it needs no Home Assistant.
 
-The bridge shows two devices:
-
-| Device | Matter type | What it does |
-| --- | --- | --- |
-| Hot Water Recirculation | On/Off plug-in unit | Starts and stops recirculation. Runs started from Matter stop on their own after `RECIRC_MINUTES` (default 5). |
-| Water Heater | Thermostat (heating only) | Shows the outlet water temperature. Sets the hot water setpoint, capped at `MAX_TEMP_F` (default 120°F). |
+The bridge shows one device, **Hot Water Recirculation**, as a Matter on/off switch. It starts and stops recirculation. Runs started from Matter stop on their own after `RECIRC_MINUTES` (default 5). The heater keeps the setpoint you set on its own panel or in the Rinnai app.
 
 > **Not affiliated with Rinnai.** This project uses an undocumented local interface. A firmware update can change or remove it at any time. Use it at your own risk. You are controlling a gas appliance.
 
 ## How it works
 
-The Control-R module runs a plain-text console on **TCP port 9798**. It has no authentication and no encryption. The bridge polls it with `list` and sends only three commands: `list`, `temperature <F>`, and `recirculation 0|1`.
+The Control-R module runs a plain-text console on **TCP port 9798**. It has no authentication and no encryption. The bridge polls it with `list` and sends only `list` and `recirculation 0|1`.
 
 ```
 Google Home / Nest hub  <── Matter (LAN) ──>  rinnai-matter-bridge  <── TCP 9798 ──>  Control-R module
@@ -89,18 +84,10 @@ All settings are environment variables.
 | `RINNAI_PORT` | `9798` | Console port |
 | `POLL_SECONDS` | `15` | How often to read the heater state |
 | `RECIRC_MINUTES` | `5` | Recirculation started from Matter stops after this many minutes |
-| `MIN_TEMP_F` | `98` | Lowest setpoint allowed |
-| `MAX_TEMP_F` | `120` | Highest setpoint allowed. The bridge never sends a higher value. |
 | `STORAGE_DIR` | `./data` (`/data` in Docker) | Matter pairing storage |
 | `MATTER_PORT` | `5540` | Matter UDP port |
 | `MATTER_PASSCODE` / `MATTER_DISCRIMINATOR` | random, saved | Fixed pairing values, if you want them |
 | `MATTER_LOG_LEVEL` | `info` (Docker) | matter.js log level |
-
-### Setpoint behavior
-
-- Rinnai accepts only these setpoints (°F): 98, 100, 102, 104, 106, 108, 110, 113, 115, 120, 125, 130, 135, 140. A request snaps to the nearest one, inside `MIN_TEMP_F` to `MAX_TEMP_F`.
-- If the heater is already set above `MAX_TEMP_F`, the bridge shows the cap and leaves the heater alone. Only a change you make from Matter sends a new setpoint.
-- Some controllers limit the range of a thermostat in their app. Recirculation works whether or not this applies.
 
 ### Timer limits
 
@@ -126,6 +113,8 @@ Write commands print nothing. Read the state back with `list` about 3 seconds la
 Useful properties: `m02_outlet_temperature`, `m08_inlet_temperature`, `set_domestic_temperature`, `domestic_combustion` (the burner is on), `recirculation_enabled`, `recirculation_capable`, `error_code`, and `module_firmware_version`.
 
 The console has other commands, such as maintenance, lock, schedule, and Zigbee pairing. The bridge never sends them.
+
+The `m..` sensor values (outlet temperature and others) are a cache. The module refreshes them only now and then, for example when the burner fires, so they are often minutes or days old. That is why the bridge does not show a temperature.
 
 ## Development
 
