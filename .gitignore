@@ -3,3 +3,4 @@ data/
 .env
 .DS_Store
 *.log
+rinnai-pairing-qr.png
