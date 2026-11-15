@@ -63,10 +63,19 @@ RINNAI_HOST=<heater-ip> npm start
 
 ## Pair with Google Home
 
+Google Home needs a free Developer Console project before it accepts a device with Matter test IDs. You do this once:
+
+1. Go to [console.home.google.com](https://console.home.google.com). Sign in with the Google account that owns your home.
+2. Create a project. Add a **Matter integration** with Vendor ID `0xFFF1` and Product ID `0x8000`.
+
+Then pair the bridge:
+
 1. Open the Google Home app. Tap **+**, then **Device**, then **New device**, then **Matter-enabled device**.
 2. Scan the QR code from the log, or enter the manual pairing code.
 3. Google warns that the device is not certified. Choose **Proceed anyway**. The bridge uses Matter test vendor IDs.
 4. Say "Hey Google, turn on hot water recirculation."
+
+If the app stays on "Getting your device ready", force-close the Google Home app and open it again. The device is often already in your list.
 
 The pairing keys are saved in `data/`. If you delete that folder, you must pair again.
 
