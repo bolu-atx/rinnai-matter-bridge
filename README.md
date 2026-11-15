@@ -74,6 +74,36 @@ If the app stays on "Getting your device ready", force-close the Google Home app
 
 The pairing keys are saved in `data/`. If you delete that folder, you must pair again.
 
+## Add to Apple Home (or a second controller)
+
+Matter lets several controllers share one device. You do not need a new pairing code.
+
+1. In Google Home, open the bridge's settings. Choose **Linked Matter apps & services**, then **Link apps & services**. Google shows a one-time code.
+2. In Apple Home, tap **+**, then **Add Accessory**, then **More options**. Enter the code.
+
+An Apple home hub (Apple TV or HomePod) keeps control working when you are away from home. Each controller works on its own, and the recirculation timer applies to runs started from any of them.
+
+## Troubleshooting
+
+Read the bridge log:
+
+```sh
+docker logs -f rinnai-bridge
+```
+
+| What you see | What it means |
+| --- | --- |
+| `Commissioned fabric: … (#N)` | A controller finished pairing. Android adds a temporary fabric first, then the Google fabric. |
+| `Subscribe successful` | A hub is connected and gets live updates. |
+| `sending recirculation 1` then `recirculation now on` | A command reached the heater, and the readback confirmed it (about 6–8 s). |
+| `sending recirculation 0 (timer)` | The auto-off timer stopped a run. |
+| `poll failed` / `heater unreachable` | The bridge cannot reach port 9798. Check the heater IP and Wi-Fi. |
+| `Subscription reported invalid by peer` | Normal. A controller moved its updates to another session. |
+
+If pairing completes but nothing reads the device afterwards, check the Google Developer Console step above.
+
+Removing or adding devices in the bridge does not need a new pairing. Endpoint numbers are saved in `data/`, so existing devices keep their place.
+
 ## Configuration
 
 All settings are environment variables.
@@ -114,7 +144,7 @@ Useful properties: `m02_outlet_temperature`, `m08_inlet_temperature`, `set_domes
 
 The console has other commands, such as maintenance, lock, schedule, and Zigbee pairing. The bridge never sends them.
 
-The `m..` sensor values (outlet temperature and others) are a cache. The module refreshes them only now and then, for example when the burner fires, so they are often minutes or days old. That is why the bridge does not show a temperature.
+The `m..` sensor values (outlet temperature and others) are a cache. The module refreshes them only now and then, for example when the burner fires, so they are often minutes or days old. That is why the bridge does not show a temperature. The `status` command ("fetch heater status") does not refresh them. The Rinnai app's maintenance screen probably does, through the writable `do_maintenance_retrieval` property. That is not tested yet.
 
 ## Development
 
